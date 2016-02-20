@@ -12,14 +12,8 @@ class Issues extends BaseModel
     do (->
       data = []
       cb = (retData) =>
-        if retData.length == params.per_page
-          @debug "Recurse Issues::all()"
-          data = data.concat(retData)
-          params.page++
-          return @get "issues", params, cb
-        else
-          data = data.concat(retData)
-          fn data if fn
+        data = data.concat(retData)
+        fn data if fn
 
       @get "issues", params, cb
     ).bind(@)
